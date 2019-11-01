@@ -38,6 +38,26 @@ public class ServerQuery {
         return searchData;
     }
 
+    public String[][] getPrioritySearchResults(String query) {
+        String[][] searchData = new String[0][];
+        for(String[] ticket:data) {
+            if(ticket[2].equals(query)) {
+                searchData = appendRow(searchData, ticket);
+            }
+        }
+        return searchData;
+    }
+
+    public String[][] getSeveritySearchResults(String query) {
+        String[][] searchData = new String[0][];
+        for (String[] ticket : data) {
+            if (ticket[3].equals(query)) {
+                searchData = appendRow(searchData, ticket);
+            }
+        }
+        return searchData;
+    }
+
     // Appends row to data model
     private String[][] appendRow(String[][] array, String[] row) {
         String[][] newArray = new String[array.length + 1][];
