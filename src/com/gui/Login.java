@@ -1,6 +1,6 @@
 package com.gui;
 
-import com.mock.Authentication;
+import com.controllers.Authentication;
 
 import javax.swing.*;
 import java.awt.*;
