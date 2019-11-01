@@ -56,6 +56,7 @@ public class MainWindow extends JFrame {
         System.out.println(this.accessLevel);
 
         initTable();
+        initButtons();
         initListeners();
     }
 
@@ -82,8 +83,16 @@ public class MainWindow extends JFrame {
         ticketTable.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
         ticketTable.setFont(new Font("Tahoma", Font.PLAIN, 12));
         ticketTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ticketTable.setAutoCreateRowSorter(true);
 
         tableScrollPane.setViewportView(ticketTable);
+    }
+
+    private void initButtons() {
+        //searchButton.setBorderPainted(false);
+        searchButton.setContentAreaFilled(false);
+        searchButton.setFocusPainted(false);
+        searchButton.setOpaque(false);
     }
 
     // Initializes all listeners of the window
