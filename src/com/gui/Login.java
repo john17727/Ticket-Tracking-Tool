@@ -31,13 +31,13 @@ public class Login extends JFrame{
         loginButton.addActionListener(actionEvent -> {
             String userName = userEdit.getText();
             char[] charPassword = passwordEdit.getPassword();
-            System.out.println(charToString(charPassword));
+            //System.out.println(charToString(charPassword));
             String password = hashPassword(charPassword);
             if(!userName.isEmpty() && !password.isEmpty()) {
-                int Authenticate = Authentication.login(userName, password);
+                int accessLevel = Authentication.login(userName, password);
                 //og
-                if (Authenticate != -1) {
-                    new MainWindow().setVisible(true);
+                if (accessLevel != -1) {
+                    new MainWindow(accessLevel).setVisible(true);
                     dispose();//end of og
                 } else {
                     errorMsg.setVisible(true);
@@ -46,13 +46,13 @@ public class Login extends JFrame{
         });
     }
 
-    public static String hashPassword(char[] password) {
+    private static String hashPassword(char[] password) {
         String hashedPass = "";
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(toBytes(password));
             hashedPass = bytesToHex(encodedHash);
-            System.out.println(hashedPass);
+            //System.out.println(hashedPass);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -79,7 +79,7 @@ public class Login extends JFrame{
         return bytes;
     }
 
-    public static String charToString(char[] charArray) {
+    private static String charToString(char[] charArray) {
         String result = "";
         for(char aChar: charArray) {
             result += String.valueOf(aChar);

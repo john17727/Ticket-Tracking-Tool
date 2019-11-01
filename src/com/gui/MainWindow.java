@@ -39,16 +39,21 @@ public class MainWindow extends JFrame {
     private ServerQuery serverQuery;
 
     private String[] header;
+    private int accessLevel;
 
-    public MainWindow() {
+    public MainWindow(int accessLevel) {
+        this.accessLevel = accessLevel;
         add(mainPanel);
         setTitle("Ticket Manager");
         setSize(1200, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        getRootPane().setDefaultButton(searchButton);
 
         serverQuery = new ServerQuery();
+
+        System.out.println(this.accessLevel);
 
         initTable();
         initListeners();
