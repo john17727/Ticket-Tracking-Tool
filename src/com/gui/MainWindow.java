@@ -1,6 +1,8 @@
 package com.gui;
 
 import com.mock.ServerQuery;
+import com.mock.Ticket;
+import com.mock.TicketTableItem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +10,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainWindow extends JFrame {
 
@@ -64,14 +68,16 @@ public class MainWindow extends JFrame {
     private void initTable() {
         header = new String[]{"Title", "Status", "Priority", "Severity", "Assigned To"};
 
-        String[][] data = serverQuery.getDefault();
+        //String[][] data = serverQuery.getDefault();
+        List<Ticket> data = new ArrayList<Ticket>(serverQuery.getDefault());
         showTable(data);
 
     }
 
     // Creates table based on data model
-    private void showTable(String[][] dataModel) {
-        ticketTable = new JTable(dataModel, header) {
+    private void showTable(List<Ticket> dataModel) {
+        TicketTableItem model = new TicketTableItem(dataModel);
+        ticketTable = new JTable(model) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -114,7 +120,7 @@ public class MainWindow extends JFrame {
         searchButton.addActionListener(actionEvent -> {
             String query = searchTextField.getText();
             if(!query.isEmpty()) {
-                String[][] searchData = serverQuery.getSearchResults(query);
+                List<Ticket> searchData = serverQuery.getSearchResults(query);
                 showTable(searchData);
             } else {
                 initTable();
@@ -126,8 +132,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = routineButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getSeveritySearchResults("Routine");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getSeveritySearchResults("Routine");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -138,8 +144,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = urgentButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getSeveritySearchResults("Urgent");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getSeveritySearchResults("Urgent");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -150,8 +156,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = criticalButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getSeveritySearchResults("Critical");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getSeveritySearchResults("Critical");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -162,8 +168,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = newButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getSearchResults("New");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getSearchResults("New");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -174,8 +180,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = openButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getSearchResults("Open");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getSearchResults("Open");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -186,8 +192,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = closedButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getSearchResults("Closed");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getSearchResults("Closed");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -198,8 +204,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("1");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("1");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -210,8 +216,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("2");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("2");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -222,8 +228,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("3");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("3");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -234,8 +240,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("4");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("4");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -246,8 +252,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("5");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("5");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -258,8 +264,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("6");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("6");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -270,8 +276,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("7");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("7");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -282,8 +288,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("8");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("8");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -294,8 +300,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("9");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("9");
+                //showTable(searchData);
             } else {
                 initTable();
             }
@@ -306,8 +312,8 @@ public class MainWindow extends JFrame {
 
             boolean selected = priorityButton.getModel().isSelected();
             if(selected) {
-                String[][] searchData = serverQuery.getPrioritySearchResults("10");
-                showTable(searchData);
+                //String[][] searchData = serverQuery.getPrioritySearchResults("10");
+                //showTable(searchData);
             } else {
                 initTable();
             }
