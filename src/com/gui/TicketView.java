@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class TicketView extends JFrame{
     private JTextArea textArea1;
-    private JTextField textField1;
+    private JTextField titleEdit;
     private JTextField textField3;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
@@ -18,18 +18,27 @@ public class TicketView extends JFrame{
     private JComboBox comboBox4;
     private JPanel mainPanel;
 
-    public TicketView() {
+    private String title;
+
+    public TicketView(String title) {
+        this.title = title;
         add(mainPanel);
         setTitle("Add New Ticket");
         setSize(800, 600);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
+        setInfo();
+    }
+
+    public void setInfo() {
+        titleEdit.setText(title);
     }
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         SwingUtilities.invokeLater(() -> {
-            new TicketView().setVisible(true);
+            new TicketView("Title").setVisible(true);
         });
     }
 }

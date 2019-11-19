@@ -43,6 +43,7 @@ public class MainWindow extends JFrame {
     private ServerQuery serverQuery;
 
     private String[] header;
+    private TicketTableItem model;
     private int accessLevel;
 
     public MainWindow(int accessLevel) {
@@ -76,7 +77,7 @@ public class MainWindow extends JFrame {
 
     // Creates table based on data model
     private void showTable(List<Ticket> dataModel) {
-        TicketTableItem model = new TicketTableItem(dataModel);
+        model = new TicketTableItem(dataModel);
         ticketTable = new JTable(model) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -112,7 +113,8 @@ public class MainWindow extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 //super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    new TicketView().setVisible(true);
+                    Ticket ticket = model.getTicketAt(ticketTable.getSelectedRow());
+                    new TicketView(ticket.getTitle()).setVisible(true);
                 }
             }
         });

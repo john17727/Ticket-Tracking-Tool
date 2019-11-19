@@ -6,6 +6,9 @@ public class Ticket {
     private int priority;
     private String severity;
     private String assignedTo;
+    private String client;
+    private String description;
+    private long date;
 
     public Ticket(String title, String status, int priority, String severity, String assignedTo) {
         this.title = title;
@@ -53,5 +56,29 @@ public class Ticket {
 
     public void setAssignedTo(String assignedTo) {
         this.assignedTo = assignedTo;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }
