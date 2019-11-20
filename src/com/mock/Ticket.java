@@ -16,6 +16,9 @@ public class Ticket {
         this.priority = priority;
         this.severity = severity;
         this.assignedTo = assignedTo;
+        this.client = "A Client";
+        this.description = "Description";
+        this.date = 0;
     }
 
     public String getTitle() {

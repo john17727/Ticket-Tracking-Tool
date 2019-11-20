@@ -1,5 +1,7 @@
 package com.mock;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +25,23 @@ public class ServerQuery {
                 {"Ticket 8", "Open", "9", "Critical", "Sam Tinevra"},
         };
 
+        List<String> jsonInfo = new ArrayList<String>();
+        jsonInfo.add("{\"title\":\"Ticket 1\",\"status\":\"Open\",\"priority\":10,\"severity\":\"Urgent\",\"assignedTo\":\"Juan Rincon\",\"client\":\"NASA\",\"description\":\"Cool Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 2\",\"status\":\"Open\",\"priority\":3,\"severity\":\"Routine\",\"assignedTo\":\"Alex Ortega\",\"client\":\"NASA\",\"description\":\"Awesome Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 3\",\"status\":\"Open\",\"priority\":7,\"severity\":\"Routine\",\"assignedTo\":\"Daniel Maynez\",\"client\":\"NASA\",\"description\":\"Typical Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 4\",\"status\":\"Open\",\"priority\":7,\"severity\":\"Routine\",\"assignedTo\":\"George Juarez\",\"client\":\"NASA\",\"description\":\"Nice Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 5\",\"status\":\"Open\",\"priority\":5,\"severity\":\"Critical\",\"assignedTo\":\"Miguel Camarillo\",\"client\":\"NASA\",\"description\":\"Lovely Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 6\",\"status\":\"Open\",\"priority\":4,\"severity\":\"Routine\",\"assignedTo\":\"Daniel Villa\",\"client\":\"NASA\",\"description\":\"Confident Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 7\",\"status\":\"Open\",\"priority\":2,\"severity\":\"Urgent\",\"assignedTo\":\"Paulina Cervantez\",\"client\":\"NASA\",\"description\":\"Joyful Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 8\",\"status\":\"Open\",\"priority\":9,\"severity\":\"Critical\",\"assignedTo\":\"Sam Tinevra\",\"client\":\"NASA\",\"description\":\"Super Description\",\"date\":0}");
+
         data = new ArrayList<Ticket>();
-        data.add(new Ticket("Ticket 1", "Open", 10, "Urgent", "Juan Rincon"));
+        for(String info:jsonInfo) {
+            data.add(toTicket(info));
+        }
+        /*
+        Ticket me = new Ticket("Ticket 1", "Open", 10, "Urgent", "Juan Rincon");
+        data.add(me);
         data.add(new Ticket("Ticket 2", "Open", 3, "Routine", "Alex Ortega"));
         data.add(new Ticket("Ticket 3", "Open", 7, "Routine", "Daniel Maynez"));
         data.add(new Ticket("Ticket 4", "Open", 7, "Routine", "Daniel Villa"));
@@ -32,6 +49,22 @@ public class ServerQuery {
         data.add(new Ticket("Ticket 6", "Open", 4, "Routine", "Miguel Camarillo"));
         data.add(new Ticket("Ticket 7", "Open", 2, "Urgent", "Paulina Cervantes"));
         data.add(new Ticket("Ticket 8", "Open", 9, "Critical", "Sam Tinevra"));
+
+        toJSON(me);
+         */
+    }
+
+    public Ticket toTicket(String json) {
+        Gson gson = new Gson();
+        Ticket ticket = gson.fromJson(json, Ticket.class);
+        return ticket;
+    }
+
+    public void toJSON(Ticket ticket) {
+        Gson gson = new Gson();
+
+        String jsonString = gson.toJson(ticket);
+        System.out.println(jsonString);
     }
 
     // Gets default data
