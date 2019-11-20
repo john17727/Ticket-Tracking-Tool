@@ -1,44 +1,49 @@
 package com.gui;
 
+import com.mock.Ticket;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TicketView extends JFrame{
-    private JTextArea textArea1;
+    private JTextArea descEdit;
     private JTextField titleEdit;
-    private JTextField textField3;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
-    private JTextArea textArea2;
+    private JTextField clientEdit;
+    private JComboBox priorityBox;
+    private JComboBox severityBox;
+    private JTextArea resEdit;
     private JButton closeButton;
     private JButton rejectButton;
     private JButton saveButton;
     private JButton resolvedButton;
-    private JComboBox comboBox3;
-    private JComboBox comboBox4;
+    private JComboBox assignBox;
+    private JComboBox statusBox;
     private JPanel mainPanel;
 
-    private String title;
-
-    public TicketView(String title) {
-        this.title = title;
+    public TicketView(Ticket ticket) {
         add(mainPanel);
         setTitle("Add New Ticket");
         setSize(800, 600);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
-        setInfo();
+        setInfo(ticket);
     }
 
-    public void setInfo() {
-        titleEdit.setText(title);
+    public void setInfo(Ticket ticket) {
+        titleEdit.setText(ticket.getTitle());
+        descEdit.setText(ticket.getDescription());
+        clientEdit.setText(ticket.getClient());
+        priorityBox.addItem(ticket.getPriority());
+        severityBox.addItem(ticket.getSeverity());
+        assignBox.addItem(ticket.getAssignedTo());
+        statusBox.addItem(ticket.getStatus());
     }
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         SwingUtilities.invokeLater(() -> {
-            new TicketView("Title").setVisible(true);
+            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default")).setVisible(true);
         });
     }
 }

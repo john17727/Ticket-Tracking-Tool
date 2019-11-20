@@ -105,7 +105,7 @@ public class MainWindow extends JFrame {
                 //super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Ticket ticket = model.getTicketAt(ticketTable.getSelectedRow());
-                    new TicketView(ticket.getTitle()).setVisible(true);
+                    new TicketView(ticket).setVisible(true);
                 }
             }
         });
