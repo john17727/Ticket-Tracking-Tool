@@ -17,17 +17,7 @@ public class MainWindow extends JFrame {
 
     private JTextField searchTextField;
     private JTable ticketTable;
-    private JCheckBox a1CheckBox;
-    private JCheckBox a2CheckBox;
-    private JCheckBox a3CheckBox;
     private JButton addTicketButton;
-    private JCheckBox a4CheckBox;
-    private JCheckBox a5CheckBox;
-    private JCheckBox a6CheckBox;
-    private JCheckBox a7CheckBox;
-    private JCheckBox a8CheckBox;
-    private JCheckBox a9CheckBox;
-    private JCheckBox a10CheckBox;
     private JCheckBox criticalCheckBox;
     private JCheckBox newCheckBox;
     private JCheckBox openCheckBox;
@@ -41,6 +31,7 @@ public class MainWindow extends JFrame {
     private JLabel priorityLabel;
     private JButton searchButton;
     private ServerQuery serverQuery;
+    private JComboBox priorityDropdownList;
 
     private String[] header;
     private TicketTableItem model;
@@ -201,123 +192,76 @@ public class MainWindow extends JFrame {
             }
         });
 
-        a1CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
+        priorityDropdownList.addItem("");
+        priorityDropdownList.addItem("1");
+        priorityDropdownList.addItem("2");
+        priorityDropdownList.addItem("3");
+        priorityDropdownList.addItem("4");
+        priorityDropdownList.addItem("5");
+        priorityDropdownList.addItem("6");
+        priorityDropdownList.addItem("7");
+        priorityDropdownList.addItem("8");
+        priorityDropdownList.addItem("9");
+        priorityDropdownList.addItem("10");
 
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("1");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a2CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("2");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a3CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("3");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a4CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("4");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a5CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("5");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a6CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("6");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a7CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("7");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a8CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("8");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a9CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("9");
-                //showTable(searchData);
-            } else {
-                initTable();
-            }
-        });
-
-        a10CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                //String[][] searchData = serverQuery.getPrioritySearchResults("10");
-                //showTable(searchData);
-            } else {
-                initTable();
+        priorityDropdownList.addActionListener(actionEvent -> {
+            //AbstractButton priorityDropdown = (AbstractButton) actionEvent.getSource();
+            String x = priorityDropdownList.getSelectedItem().toString();
+            switch (x) {
+                case "1":
+                    System.out.println("1 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("1");
+                    //showTable(searchData);
+                    break;
+                case "2":
+                    System.out.println("2 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("2");
+                    //showTable(searchData);
+                    break;
+                case "3":
+                    System.out.println("3 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("3");
+                    //showTable(searchData);
+                    break;
+                case "4":
+                    System.out.println("4 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("4");
+                    //showTable(searchData);
+                    break;
+                case "5":
+                    System.out.println("5 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("5");
+                    //showTable(searchData);
+                    break;
+                case "6":
+                    System.out.println("6 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("6");
+                    //showTable(searchData);
+                    break;
+                case "7":
+                    System.out.println("7 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("7");
+                    //showTable(searchData);
+                    break;
+                case "8":
+                    System.out.println("8 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("8");
+                    //showTable(searchData);
+                    break;
+                case "9":
+                    System.out.println("9 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("9");
+                    //showTable(searchData);
+                    break;
+                case "10":
+                    System.out.println("10 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("10");
+                    //showTable(searchData);
+                    break;
+                default:
+                    System.out.println("Reset the thing");
+                    //initTable();
+                    break;
             }
         });
     }
