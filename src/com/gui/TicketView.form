@@ -33,7 +33,7 @@
           <text value="Description"/>
         </properties>
       </component>
-      <component id="4439a" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+      <component id="4439a" class="javax.swing.JTextArea" binding="descEdit">
         <constraints>
           <grid row="2" column="1" row-span="6" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -89,7 +89,7 @@
           <text value="Severity"/>
         </properties>
       </component>
-      <component id="8875c" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="8875c" class="javax.swing.JTextField" binding="clientEdit">
         <constraints>
           <grid row="2" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -97,7 +97,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="5fc30" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+      <component id="5fc30" class="javax.swing.JComboBox" binding="severityBox">
         <constraints>
           <grid row="6" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -111,7 +111,7 @@
           <text value="Resolution"/>
         </properties>
       </component>
-      <component id="ce051" class="javax.swing.JTextArea" binding="textArea2" default-binding="true">
+      <component id="ce051" class="javax.swing.JTextArea" binding="resEdit">
         <constraints>
           <grid row="8" column="1" row-span="4" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -167,7 +167,7 @@
           <text value="Save"/>
         </properties>
       </component>
-      <component id="bee50" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="bee50" class="javax.swing.JComboBox" binding="priorityBox">
         <constraints>
           <grid row="5" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -187,13 +187,13 @@
           <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="464d9" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+      <component id="464d9" class="javax.swing.JComboBox" binding="assignBox">
         <constraints>
           <grid row="3" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="261aa" class="javax.swing.JComboBox" binding="comboBox4" default-binding="true">
+      <component id="261aa" class="javax.swing.JComboBox" binding="statusBox">
         <constraints>
           <grid row="1" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
