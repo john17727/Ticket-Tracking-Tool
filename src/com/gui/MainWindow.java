@@ -84,6 +84,7 @@ public class MainWindow extends JFrame {
         ticketTable.setFont(new Font("Tahoma", Font.PLAIN, 12));
         ticketTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ticketTable.setAutoCreateRowSorter(true);
+        ticketTable.setIntercellSpacing(new Dimension(8, 2));
 
         tableScrollPane.setViewportView(ticketTable);
         initTableListener();
