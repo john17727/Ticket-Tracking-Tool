@@ -26,11 +26,11 @@ public class ServerQuery {
         };
 
         List<String> jsonInfo = new ArrayList<String>();
-        jsonInfo.add("{\"title\":\"Ticket 1\",\"status\":\"Open\",\"priority\":10,\"severity\":\"Urgent\",\"assignedTo\":\"Juan Rincon\",\"client\":\"NASA\",\"description\":\"Cool Description\",\"date\":0}");
-        jsonInfo.add("{\"title\":\"Ticket 2\",\"status\":\"Open\",\"priority\":3,\"severity\":\"Routine\",\"assignedTo\":\"Alex Ortega\",\"client\":\"NASA\",\"description\":\"Awesome Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 1\",\"status\":\"New\",\"priority\":10,\"severity\":\"Urgent\",\"assignedTo\":\"Juan Rincon\",\"client\":\"NASA\",\"description\":\"Cool Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 2\",\"status\":\"New\",\"priority\":3,\"severity\":\"Routine\",\"assignedTo\":\"Alex Ortega\",\"client\":\"NASA\",\"description\":\"Awesome Description\",\"date\":0}");
         jsonInfo.add("{\"title\":\"Ticket 3\",\"status\":\"Open\",\"priority\":7,\"severity\":\"Routine\",\"assignedTo\":\"Daniel Maynez\",\"client\":\"NASA\",\"description\":\"Typical Description\",\"date\":0}");
         jsonInfo.add("{\"title\":\"Ticket 4\",\"status\":\"Open\",\"priority\":7,\"severity\":\"Routine\",\"assignedTo\":\"George Juarez\",\"client\":\"NASA\",\"description\":\"Nice Description\",\"date\":0}");
-        jsonInfo.add("{\"title\":\"Ticket 5\",\"status\":\"Open\",\"priority\":5,\"severity\":\"Critical\",\"assignedTo\":\"Miguel Camarillo\",\"client\":\"NASA\",\"description\":\"Lovely Description\",\"date\":0}");
+        jsonInfo.add("{\"title\":\"Ticket 5\",\"status\":\"New\",\"priority\":5,\"severity\":\"Critical\",\"assignedTo\":\"Miguel Camarillo\",\"client\":\"NASA\",\"description\":\"Lovely Description\",\"date\":0}");
         jsonInfo.add("{\"title\":\"Ticket 6\",\"status\":\"Open\",\"priority\":4,\"severity\":\"Routine\",\"assignedTo\":\"Daniel Villa\",\"client\":\"NASA\",\"description\":\"Confident Description\",\"date\":0}");
         jsonInfo.add("{\"title\":\"Ticket 7\",\"status\":\"Open\",\"priority\":2,\"severity\":\"Urgent\",\"assignedTo\":\"Paulina Cervantez\",\"client\":\"NASA\",\"description\":\"Joyful Description\",\"date\":0}");
         jsonInfo.add("{\"title\":\"Ticket 8\",\"status\":\"Open\",\"priority\":9,\"severity\":\"Critical\",\"assignedTo\":\"Sam Tinevra\",\"client\":\"NASA\",\"description\":\"Super Description\",\"date\":0}");
@@ -64,7 +64,6 @@ public class ServerQuery {
         Gson gson = new Gson();
 
         String jsonString = gson.toJson(ticket);
-        System.out.println(jsonString);
     }
 
     // Gets default data
@@ -83,6 +82,36 @@ public class ServerQuery {
             } else if(ticket.getSeverity().contains(query)) {
                 searchResults.add(ticket);
             } else if(ticket.getAssignedTo().contains(query)) {
+                searchResults.add(ticket);
+            } else if(Integer.toString(ticket.getPriority()).contains(query)) {
+                searchResults.add(ticket);
+            }
+        }
+        return searchResults;
+    }
+
+    public List<Ticket> getSearchResults(List<Ticket> data, String query) {
+        List<Ticket> searchResults = new ArrayList<Ticket>();
+        for(Ticket ticket: data) {
+            if(ticket.getTitle().contains(query)) {
+                searchResults.add(ticket);
+            } else if(ticket.getStatus().contains(query)) {
+                searchResults.add(ticket);
+            } else if(ticket.getSeverity().contains(query)) {
+                searchResults.add(ticket);
+            } else if(ticket.getAssignedTo().contains(query)) {
+                searchResults.add(ticket);
+            } else if(Integer.toString(ticket.getPriority()).contains(query)) {
+                searchResults.add(ticket);
+            }
+        }
+        return searchResults;
+    }
+
+    public List<Ticket> removeSeverityFilter(List<Ticket> data, String query) {
+        List<Ticket> searchResults = new ArrayList<Ticket>();
+        for(Ticket ticket:data) {
+            if(!ticket.getSeverity().contains(query)) {
                 searchResults.add(ticket);
             }
         }

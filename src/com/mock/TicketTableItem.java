@@ -69,7 +69,19 @@ public class TicketTableItem extends AbstractTableModel {
         return name;
     }
 
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        if (tickets.isEmpty()) {
+            return Object.class;
+        }
+        return getValueAt(0, columnIndex).getClass();
+    }
+
     public Ticket getTicketAt(int row) {
         return tickets.get(row);
+    }
+
+    public void printTickets() {
+        tickets.forEach(ticket -> System.out.println(ticket.getTitle()));
     }
 }
