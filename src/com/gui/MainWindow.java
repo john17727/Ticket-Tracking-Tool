@@ -264,41 +264,41 @@ public class MainWindow extends JFrame {
                     break;
             }
         });
+    }
 
-        public void severityToggleOn (String query){
-            severity.add(query);
-            data = ticketManager.filter(severity, status, priority);
-            showTable(data);
-        }
+    public void severityToggleOn (String query){
+        severity.add(query);
+        data = ticketManager.filter(severity, status, priority);
+        showTable(data);
+    }
 
-        public void severityToggleOff (String query){
-            severity.remove(query);
-            data = ticketManager.filter(severity, status, priority);
-            showTable(data);
-        }
+    public void severityToggleOff (String query){
+        severity.remove(query);
+        data = ticketManager.filter(severity, status, priority);
+        showTable(data);
+    }
 
-        public void statusToggleOn (String query){
-            status.add(query);
-            data = ticketManager.filter(severity, status, priority);
-            showTable(data);
-        }
+    public void statusToggleOn (String query){
+        status.add(query);
+        data = ticketManager.filter(severity, status, priority);
+        showTable(data);
+    }
 
-        public void statusToggleOff (String query){
-            status.remove(query);
-            data = ticketManager.filter(severity, status, priority);
-            showTable(data);
-        }
+    public void statusToggleOff (String query){
+        status.remove(query);
+        data = ticketManager.filter(severity, status, priority);
+        showTable(data);
+    }
 
-        public void priorityToggleOn ( int query){
-            priority.add(query);
-            data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
-            showTable(data);
-        }
+    public void priorityToggleOn ( int query){
+        priority.add(query);
+        data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
+        showTable(data);
+    }
 
-        public void priorityToggleOff ( int query){
-            priority.remove(Integer.valueOf(query));
-            data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
-            showTable(data);
-        }
+    public void priorityToggleOff ( int query){
+        priority.remove(Integer.valueOf(query));
+        data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
+        showTable(data);
     }
 }
