@@ -7,7 +7,6 @@ import com.mock.TicketTableItem;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,17 +18,7 @@ public class MainWindow extends JFrame {
 
     private JTextField searchTextField;
     private JTable ticketTable;
-    private JCheckBox a1CheckBox;
-    private JCheckBox a2CheckBox;
-    private JCheckBox a3CheckBox;
     private JButton addTicketButton;
-    private JCheckBox a4CheckBox;
-    private JCheckBox a5CheckBox;
-    private JCheckBox a6CheckBox;
-    private JCheckBox a7CheckBox;
-    private JCheckBox a8CheckBox;
-    private JCheckBox a9CheckBox;
-    private JCheckBox a10CheckBox;
     private JCheckBox criticalCheckBox;
     private JCheckBox newCheckBox;
     private JCheckBox openCheckBox;
@@ -42,6 +31,8 @@ public class MainWindow extends JFrame {
     private JSplitPane splitPane;
     private JLabel priorityLabel;
     private JButton searchButton;
+    private ServerQuery serverQuery;
+    private JComboBox priorityDropdownList;
 
     private TicketManager ticketManager;
 
@@ -126,7 +117,7 @@ public class MainWindow extends JFrame {
 
         searchButton.addActionListener(actionEvent -> {
             String query = searchTextField.getText();
-            if(!query.isEmpty()) {
+            if (!query.isEmpty()) {
                 data = ticketManager.search(query);
                 showTable(data);
             } else {
@@ -139,7 +130,7 @@ public class MainWindow extends JFrame {
             AbstractButton routineButton = (AbstractButton) actionEvent.getSource();
 
             boolean selected = routineButton.getModel().isSelected();
-            if(selected) {
+            if (selected) {
                 severityToggleOn("Routine");
             } else {
                 severityToggleOff("Routine");
@@ -150,7 +141,7 @@ public class MainWindow extends JFrame {
             AbstractButton urgentButton = (AbstractButton) actionEvent.getSource();
 
             boolean selected = urgentButton.getModel().isSelected();
-            if(selected) {
+            if (selected) {
                 severityToggleOn("Urgent");
             } else {
                 severityToggleOff("Urgent");
@@ -161,7 +152,7 @@ public class MainWindow extends JFrame {
             AbstractButton criticalButton = (AbstractButton) actionEvent.getSource();
 
             boolean selected = criticalButton.getModel().isSelected();
-            if(selected) {
+            if (selected) {
                 severityToggleOn("Critical");
             } else {
                 severityToggleOff("Critical");
@@ -172,7 +163,7 @@ public class MainWindow extends JFrame {
             AbstractButton newButton = (AbstractButton) actionEvent.getSource();
 
             boolean selected = newButton.getModel().isSelected();
-            if(selected) {
+            if (selected) {
                 statusToggleOn("New");
             } else {
                 statusToggleOff("New");
@@ -183,7 +174,7 @@ public class MainWindow extends JFrame {
             AbstractButton openButton = (AbstractButton) actionEvent.getSource();
 
             boolean selected = openButton.getModel().isSelected();
-            if(selected) {
+            if (selected) {
                 statusToggleOn("Open");
             } else {
                 statusToggleOff("Open");
@@ -194,157 +185,120 @@ public class MainWindow extends JFrame {
             AbstractButton closedButton = (AbstractButton) actionEvent.getSource();
 
             boolean selected = closedButton.getModel().isSelected();
-            if(selected) {
+            if (selected) {
                 statusToggleOn("Closed");
             } else {
                 statusToggleOff("Closed");
             }
         });
 
-        a1CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
+        priorityDropdownList.addItem("");
+        priorityDropdownList.addItem("1");
+        priorityDropdownList.addItem("2");
+        priorityDropdownList.addItem("3");
+        priorityDropdownList.addItem("4");
+        priorityDropdownList.addItem("5");
+        priorityDropdownList.addItem("6");
+        priorityDropdownList.addItem("7");
+        priorityDropdownList.addItem("8");
+        priorityDropdownList.addItem("9");
+        priorityDropdownList.addItem("10");
 
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(1);
-            } else {
-                priorityToggleOff(1);
+        priorityDropdownList.addActionListener(actionEvent -> {
+            //AbstractButton priorityDropdown = (AbstractButton) actionEvent.getSource();
+            String x = priorityDropdownList.getSelectedItem().toString();
+            switch (x) {
+                case "1":
+                    System.out.println("1 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("1");
+                    //showTable(searchData);
+                    break;
+                case "2":
+                    System.out.println("2 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("2");
+                    //showTable(searchData);
+                    break;
+                case "3":
+                    System.out.println("3 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("3");
+                    //showTable(searchData);
+                    break;
+                case "4":
+                    System.out.println("4 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("4");
+                    //showTable(searchData);
+                    break;
+                case "5":
+                    System.out.println("5 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("5");
+                    //showTable(searchData);
+                    break;
+                case "6":
+                    System.out.println("6 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("6");
+                    //showTable(searchData);
+                    break;
+                case "7":
+                    System.out.println("7 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("7");
+                    //showTable(searchData);
+                    break;
+                case "8":
+                    System.out.println("8 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("8");
+                    //showTable(searchData);
+                    break;
+                case "9":
+                    System.out.println("9 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("9");
+                    //showTable(searchData);
+                    break;
+                case "10":
+                    System.out.println("10 selected");
+                    //String[][] searchData = serverQuery.getPrioritySearchResults("10");
+                    //showTable(searchData);
+                    break;
+                default:
+                    System.out.println("Reset the thing");
+                    //initTable();
+                    break;
             }
         });
 
-        a2CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
+        public void severityToggleOn (String query){
+            severity.add(query);
+            data = ticketManager.filter(severity, status, priority);
+            showTable(data);
+        }
 
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(2);
-            } else {
-                priorityToggleOff(2);
-            }
-        });
+        public void severityToggleOff (String query){
+            severity.remove(query);
+            data = ticketManager.filter(severity, status, priority);
+            showTable(data);
+        }
 
-        a3CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
+        public void statusToggleOn (String query){
+            status.add(query);
+            data = ticketManager.filter(severity, status, priority);
+            showTable(data);
+        }
 
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(3);
-            } else {
-                priorityToggleOff(3);
-            }
-        });
+        public void statusToggleOff (String query){
+            status.remove(query);
+            data = ticketManager.filter(severity, status, priority);
+            showTable(data);
+        }
 
-        a4CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
+        public void priorityToggleOn ( int query){
+            priority.add(query);
+            data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
+            showTable(data);
+        }
 
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(4);
-            } else {
-                priorityToggleOff(4);
-            }
-        });
-
-        a5CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(5);
-            } else {
-                priorityToggleOff(5);
-            }
-        });
-
-        a6CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(6);
-            } else {
-                priorityToggleOff(6);
-            }
-        });
-
-        a7CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(7);
-            } else {
-                priorityToggleOff(7);
-            }
-        });
-
-        a8CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(8);
-            } else {
-                priorityToggleOff(8);
-            }
-        });
-
-        a9CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(9);
-            } else {
-                priorityToggleOff(9);
-            }
-        });
-
-        a10CheckBox.addActionListener(actionEvent -> {
-            AbstractButton priorityButton = (AbstractButton) actionEvent.getSource();
-
-            boolean selected = priorityButton.getModel().isSelected();
-            if(selected) {
-                priorityToggleOn(10);
-            } else {
-                priorityToggleOff(10);
-            }
-        });
-    }
-
-    public void severityToggleOn(String query) {
-        severity.add(query);
-        data = ticketManager.filter(severity, status, priority);
-        showTable(data);
-    }
-
-    public void severityToggleOff(String query) {
-        severity.remove(query);
-        data = ticketManager.filter(severity, status, priority);
-        showTable(data);
-    }
-
-    public void statusToggleOn(String query) {
-        status.add(query);
-        data = ticketManager.filter(severity, status, priority);
-        showTable(data);
-    }
-
-    public void statusToggleOff(String query) {
-        status.remove(query);
-        data = ticketManager.filter(severity, status, priority);
-        showTable(data);
-    }
-
-    public void priorityToggleOn(int query) {
-        priority.add(query);
-        data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
-        showTable(data);
-    }
-
-    public void priorityToggleOff(int query) {
-        priority.remove(Integer.valueOf(query));
-        data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
-        showTable(data);
+        public void priorityToggleOff ( int query){
+            priority.remove(Integer.valueOf(query));
+            data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
+            showTable(data);
+        }
     }
 }
