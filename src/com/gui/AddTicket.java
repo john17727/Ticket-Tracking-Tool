@@ -26,8 +26,11 @@ public class AddTicket/* extends JFrame implements ItemListener*/ extends JFrame
     private JButton CreateButton;
     private JPanel mainPanel;
     private static JFrame frame;
+    private int accessLevel;
 
-    public AddTicket() {
+    public AddTicket(int accessLevel) {
+
+        this.accessLevel = accessLevel;
         add(mainPanel);
         setTitle("Add Ticket");
         setSize(800, 600);
@@ -45,5 +48,7 @@ public class AddTicket/* extends JFrame implements ItemListener*/ extends JFrame
         severityDropbox.addItem("Routine");
         severityDropbox.addItem("Urgent");
         severityDropbox.addItem("Critical");
+
+        statusDropbox.addItem("New");
     }
 }

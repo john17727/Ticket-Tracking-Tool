@@ -19,8 +19,13 @@ public class TicketView extends JFrame{
     private JComboBox assignBox;
     private JComboBox statusBox;
     private JPanel mainPanel;
+    private static int accessLevel;
+    private String[] lvl0 = {"New", "Fixed", "Open","Rejected", "Closed"};
+    private String[] lvl1 = {"Rejected" , "Closed"};//set to open if new
+    private String[] lvl2 = {"New", "Fixed", "Open",};
 
-    public TicketView(Ticket ticket) {
+    public TicketView(Ticket ticket, int accessLevel) {
+        this.accessLevel = accessLevel;
         add(mainPanel);
         setTitle("Add New Ticket");
         setSize(800, 600);
@@ -38,12 +43,36 @@ public class TicketView extends JFrame{
         severityBox.addItem(ticket.getSeverity());
         assignBox.addItem(ticket.getAssignedTo());
         statusBox.addItem(ticket.getStatus());
+
+        if(accessLevel == 0){
+            for(int i = 0; i < lvl0.length; i++){
+
+                if(!ticket.getStatus().equals(lvl0[i])){statusBox.addItem(lvl0[i]);}
+            }
+        }
+
+        if(accessLevel == 1){
+
+            if(ticket.getStatus().equals("New")){statusBox.addItem("Open");}
+
+            for(int i = 0; i < lvl1.length; i++){
+
+                if(!ticket.getStatus().equals(lvl1[i])){statusBox.addItem(lvl1[i]);}
+            }
+        }
+
+        if(accessLevel == 2){
+            for(int i = 0; i < lvl2.length; i++){
+
+                if(!ticket.getStatus().equals(lvl2[i])){statusBox.addItem(lvl2[i]);}
+            }
+        }
     }
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         SwingUtilities.invokeLater(() -> {
-            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default")).setVisible(true);
+            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default"), accessLevel).setVisible(true);
         });
     }
 }
