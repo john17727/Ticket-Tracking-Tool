@@ -192,7 +192,7 @@ public class MainWindow extends JFrame {
             }
         });
 
-        priorityDropdownList.addItem("");
+        priorityDropdownList.addItem("None");
         priorityDropdownList.addItem("1");
         priorityDropdownList.addItem("2");
         priorityDropdownList.addItem("3");
@@ -209,58 +209,48 @@ public class MainWindow extends JFrame {
             String x = priorityDropdownList.getSelectedItem().toString();
             switch (x) {
                 case "1":
-                    System.out.println("1 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("1");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(1);
                     break;
                 case "2":
-                    System.out.println("2 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("2");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(2);
                     break;
                 case "3":
-                    System.out.println("3 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("3");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(3);
                     break;
                 case "4":
-                    System.out.println("4 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("4");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(4);
                     break;
                 case "5":
-                    System.out.println("5 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("5");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(5);
                     break;
                 case "6":
-                    System.out.println("6 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("6");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(6);
                     break;
                 case "7":
-                    System.out.println("7 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("7");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(7);
                     break;
                 case "8":
-                    System.out.println("8 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("8");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(8);
                     break;
                 case "9":
-                    System.out.println("9 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("9");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(9);
                     break;
                 case "10":
-                    System.out.println("10 selected");
-                    //String[][] searchData = serverQuery.getPrioritySearchResults("10");
-                    //showTable(searchData);
+                    priorityClear();
+                    priorityToggleOn(10);
                     break;
                 default:
-                    System.out.println("Reset the thing");
-                    //initTable();
+                    System.out.println("None selected");
+                    priorityToggleOff();
                     break;
             }
         });
@@ -296,9 +286,12 @@ public class MainWindow extends JFrame {
         showTable(data);
     }
 
-    public void priorityToggleOff ( int query){
-        priority.remove(Integer.valueOf(query));
+    public void priorityToggleOff (){
+        priority.clear();
         data = new ArrayList<Ticket>(ticketManager.filter(severity, status, priority));
         showTable(data);
+    }
+    public void priorityClear() {
+        priority.clear();
     }
 }
