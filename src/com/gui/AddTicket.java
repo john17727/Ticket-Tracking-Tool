@@ -32,13 +32,16 @@ public class AddTicket/* extends JFrame implements ItemListener*/ extends JFrame
     private JButton createButton;
     private JPanel mainPanel;
     private static JFrame frame;
+    private int accessLevel;
 
     private TicketManager ticketManager;
 
 
 
-    public AddTicket(TicketManager ticketManager) {
+    public AddTicket(int accessLevel, TicketManager ticketManager) {
         this.ticketManager = ticketManager;
+
+        this.accessLevel = accessLevel;
         add(mainPanel);
         setTitle("Add Ticket");
         setSize(800, 600);

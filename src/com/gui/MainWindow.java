@@ -56,6 +56,12 @@ public class MainWindow extends JFrame {
 
         System.out.println(this.accessLevel);
 
+        if(accessLevel == 1){
+
+            addTicketButton.setEnabled(false);
+            addTicketButton.setVisible(false);
+        }
+
         initTable();
         initButtons();
         initListeners();
@@ -103,7 +109,7 @@ public class MainWindow extends JFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Ticket ticket = model.getTicketAt(ticketTable.convertRowIndexToModel(ticketTable.getSelectedRow()));
-                    new TicketView(ticket).setVisible(true);
+                    new TicketView(ticket, accessLevel).setVisible(true);
                 }
             }
         });
@@ -120,7 +126,7 @@ public class MainWindow extends JFrame {
     // Initializes all listeners of the window
     private void initListeners() {
         addTicketButton.addActionListener(actionEvent -> {
-            AddTicket newTicket = new AddTicket(ticketManager);
+            AddTicket newTicket = new AddTicket(accessLevel, ticketManager);
             newTicket.setVisible(true);
             newTicket.addWindowListener(new WindowAdapter() {
                 @Override
