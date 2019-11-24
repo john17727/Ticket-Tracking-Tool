@@ -21,6 +21,10 @@ public class TicketManager {
         return tickets;
     }
 
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
     public List<Ticket> search(String query) {
         List<Ticket> searchResults = new ArrayList<Ticket>();
         for(Ticket ticket:tickets) {

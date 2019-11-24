@@ -8,8 +8,7 @@ import com.mock.TicketTableItem;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,12 +107,29 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        ticketTable.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                ticketTable.getSelectionModel().clearSelection();
+            }
+        });
     }
 
     // Initializes all listeners of the window
     private void initListeners() {
         addTicketButton.addActionListener(actionEvent -> {
-            new AddTicket().setVisible(true);
+            AddTicket newTicket = new AddTicket(ticketManager);
+            newTicket.setVisible(true);
+            newTicket.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    super.windowClosed(e);
+                    data = ticketManager.getTickets();
+                    showTable(data);
+                }
+            });
         });
 
         searchButton.addActionListener(actionEvent -> {
