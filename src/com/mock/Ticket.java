@@ -13,8 +13,9 @@ public class Ticket {
     private String description;
     private String solution;
     private long date;
+    private long dateEnd;
 
-    public Ticket(String title, String status, int priority, String severity, String assignedTo, String client, String description, String solution, long date) {
+    public Ticket(String title, String status, int priority, String severity, String assignedTo, String client, String description, String solution, long date, long dateEnd) {
         id = "";
         this.title = title;
         this.status = status;
@@ -25,6 +26,7 @@ public class Ticket {
         this.description = description;
         this.solution = solution;
         this.date = date;
+        this.dateEnd = dateEnd;
     }
 
     public String getTitle() {
@@ -105,6 +107,14 @@ public class Ticket {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public long getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(long dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public void replaceSpaces() {

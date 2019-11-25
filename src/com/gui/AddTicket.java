@@ -86,7 +86,7 @@ public class AddTicket extends JFrame{
 
             long date = zdt.toInstant().toEpochMilli();
 
-            Ticket ticket = new Ticket(title, status, priority, severity, assignTo, client, description, solution, date);
+            Ticket ticket = new Ticket(title, status, priority, severity, assignTo, client, description, solution, date, -1);
 
             ticket.replaceSpaces();
 
