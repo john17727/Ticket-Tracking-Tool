@@ -54,7 +54,7 @@ public class MainWindow extends JFrame {
 
         ticketManager = new TicketManager();
 
-        System.out.println(this.accessLevel);
+        //System.out.println(this.accessLevel);
 
         if(accessLevel == 1){
 
