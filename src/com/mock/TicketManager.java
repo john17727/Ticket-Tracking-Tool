@@ -23,6 +23,14 @@ public class TicketManager {
     }
 
     public List<Ticket> getTicketsFromServer() {
+        tickets = serverQuery.getDefault();
+        replaceUnderscores();
+        return tickets;
+    }
+
+    public List<Ticket> getClosedTickets() {
+        tickets = serverQuery.getClosedTickets();
+        replaceUnderscores();
         return tickets;
     }
 

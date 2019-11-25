@@ -344,14 +344,22 @@ public class MainWindow extends JFrame {
     }
 
     public void statusToggleOn (String query){
-        status.add(query);
-        data = ticketManager.filter(severity, status, priority);
+        if(query.equals("Closed")) {
+            data = ticketManager.getClosedTickets();
+        } else {
+            status.add(query);
+            data = ticketManager.filter(severity, status, priority);
+        }
         showTable(data);
     }
 
     public void statusToggleOff (String query){
-        status.remove(query);
-        data = ticketManager.filter(severity, status, priority);
+        if(query.equals("Closed")) {
+            data = ticketManager.getTicketsFromServer();
+        } else {
+            status.remove(query);
+            data = ticketManager.filter(severity, status, priority);
+        }
         showTable(data);
     }
 

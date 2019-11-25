@@ -76,7 +76,21 @@ public class ServerQuery {
     // Gets default data
     public List<Ticket> getDefault() {
         try {
-            return toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList"));
+            //List<Ticket> tickets = toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList"));
+            List<Ticket> tickets = toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList-status/New"));
+            tickets.addAll(toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList-status/Open")));
+            return tickets;
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return new ArrayList<Ticket>();
+    }
+
+    public List<Ticket> getClosedTickets() {
+
+        try {
+            List<Ticket> tickets = toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList-status/Closed"));
+            return tickets;
         } catch (IOException e) {
             System.out.println(e);
         }
