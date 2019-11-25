@@ -22,6 +22,25 @@ public class Authentication{
         return -1;
     }
 
+    public static int addNewUser(String name, String username, String email, String password, int newAccessLvl)throws IOException{
+
+        String parameters = name + "/" + username + "/" + email + "/" + password + "/" + newAccessLvl;
+        String userURL = base + parameters;
+
+        URL url = new URL(userURL);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String temp = in.readLine();
+        in.close();
+        int successful = Integer.parseInt(temp);
+
+        if(successful == 1){return 1;}
+
+        return -1;
+    }
+
     private static int connectToServer(String username, String password) throws IOException {
         String parameters = username + "/" + password + "/accesslvl";
         String userURL = base + parameters;

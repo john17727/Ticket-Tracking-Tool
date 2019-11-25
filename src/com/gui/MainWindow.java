@@ -32,6 +32,7 @@ public class MainWindow extends JFrame {
     private JButton searchButton;
     private ServerQuery serverQuery;
     private JComboBox priorityDropdownList;
+    private JButton addUserButton;
 
     private TicketManager ticketManager;
 
@@ -55,6 +56,12 @@ public class MainWindow extends JFrame {
         ticketManager = new TicketManager();
 
         System.out.println(this.accessLevel);
+
+        if(accessLevel != 0){
+
+            addUserButton.setEnabled(false);
+            addUserButton.setVisible(false);
+        }
 
         if(accessLevel == 1){
 
@@ -103,6 +110,7 @@ public class MainWindow extends JFrame {
     }
 
     private void initTableListener() {
+
         ticketTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -125,6 +133,20 @@ public class MainWindow extends JFrame {
 
     // Initializes all listeners of the window
     private void initListeners() {
+
+        addUserButton.addActionListener(ActionEvent -> {
+            AddUser newUser = new AddUser(accessLevel);
+            newUser.setVisible(true);
+            newUser.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    super.windowClosed(e);
+                    data = ticketManager.getTickets();
+                    showTable(data);
+                }
+            });
+        });
+
         addTicketButton.addActionListener(actionEvent -> {
             AddTicket newTicket = new AddTicket(accessLevel, ticketManager);
             newTicket.setVisible(true);

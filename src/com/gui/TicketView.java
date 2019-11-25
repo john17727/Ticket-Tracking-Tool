@@ -59,6 +59,11 @@ public class TicketView extends JFrame{
 
                 if(!ticket.getStatus().equals(lvl1[i])){statusBox.addItem(lvl1[i]);}
             }
+
+            for(int i = 0; i <= 10; i++){
+
+                if(ticket.getPriority() != i){priorityBox.addItem(i);}
+            }
         }
 
         if(accessLevel == 2){

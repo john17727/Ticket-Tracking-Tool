@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
-public class AddTicket/* extends JFrame implements ItemListener*/ extends JFrame{
+public class AddTicket extends JFrame{
     private JTextField titleEdit;
     private JPanel ticket;
     private JLabel NewTicketLabel;
