@@ -30,11 +30,12 @@ public class MainWindow extends JFrame {
     private JSplitPane splitPane;
     private JLabel priorityLabel;
     private JButton searchButton;
-    private ServerQuery serverQuery;
     private JComboBox priorityDropdownList;
     private JButton addUserButton;
+    private static JFrame frame;
 
     private TicketManager ticketManager;
+    private ServerQuery serverQuery;
 
     private TicketTableItem model;
     private int accessLevel;
@@ -54,6 +55,7 @@ public class MainWindow extends JFrame {
         getRootPane().setDefaultButton(searchButton);
 
         ticketManager = new TicketManager();
+        serverQuery = new ServerQuery();
 
         //System.out.println(this.accessLevel);
 
@@ -117,7 +119,35 @@ public class MainWindow extends JFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Ticket ticket = model.getTicketAt(ticketTable.convertRowIndexToModel(ticketTable.getSelectedRow()));
-                    new TicketView(ticket, accessLevel).setVisible(true);
+                    TicketView ticketView = new TicketView(ticket, accessLevel);
+                    ticketView.setVisible(true);
+                    ticketView.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowOpened(WindowEvent e) {
+                            super.windowOpened(e);
+                            if(serverQuery.isTicketInUse(ticket.getId())) {
+                                ticketView.setVisible(false);
+                                JOptionPane.showMessageDialog(frame,
+                                        "Another user is currently working on this ticket.",
+                                        "Locked Ticket",
+                                        JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                serverQuery.toggleTicketLock(ticket.getId());
+                            }
+                        }
+
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                            super.windowClosing(e);
+                            serverQuery.toggleTicketLock(ticket.getId());
+                        }
+
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            super.windowClosed(e);
+                            serverQuery.toggleTicketLock(ticket.getId());
+                        }
+                    });
                 }
             }
         });

@@ -121,6 +121,23 @@ public class ServerQuery {
         }
     }
 
+    public boolean isTicketInUse(String id) {
+        try {
+            return Boolean.parseBoolean(connectToServer("https://tinevra.herokuapp.com/ticket-check-if-open/" + id));
+        } catch (IOException e) {
+            System.out.println(e);
+            return true;
+        }
+    }
+
+    public void toggleTicketLock(String id) {
+        try {
+            connectToServer("https://tinevra.herokuapp.com/ticket-toggle-open/" + id);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     private String connectToServer(String inputURL) throws IOException {
         URL url = new URL(inputURL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -129,8 +146,6 @@ public class ServerQuery {
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String result = in.readLine();
         in.close();
-
-        System.out.println(result);
 
         return result;
     }
