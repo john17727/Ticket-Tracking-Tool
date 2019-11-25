@@ -106,4 +106,20 @@ public class Ticket {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void replaceSpaces() {
+        this.title = title.replace(' ', '_');
+        this.assignedTo = assignedTo.replace(' ', '_');
+        this.client = client.replace(' ', '_');
+        this.description = description.replace(' ', '_');
+        this.solution = solution.replace(' ', '_');
+    }
+
+    public void replaceUnderscores() {
+        this.title = title.replace('_', ' ');
+        this.assignedTo = assignedTo.replace('_', ' ');
+        this.client = client.replace('_', ' ');
+        this.description = description.replace('_', ' ');
+        this.solution = solution.replace('_', ' ');
+    }
 }
