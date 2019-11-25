@@ -166,12 +166,14 @@ public class MainWindow extends JFrame {
                         public void windowClosing(WindowEvent e) {
                             super.windowClosing(e);
                             serverQuery.toggleTicketLock(ticket.getId());
+                            showTable(data);
                         }
 
                         @Override
                         public void windowClosed(WindowEvent e) {
                             super.windowClosed(e);
                             serverQuery.toggleTicketLock(ticket.getId());
+                            showTable(data);
                         }
                     });
                 }
