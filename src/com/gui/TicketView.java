@@ -9,6 +9,7 @@ import java.awt.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 import java.util.List;
@@ -76,6 +77,12 @@ public class TicketView extends JFrame{
         openDateLabel.setText(date.toLocalDate().toString());
         LocalDateTime now = LocalDateTime.now();
         daysOpenLabel.setText(String.valueOf(ChronoUnit.DAYS.between(date.toLocalDate(), now.toLocalDate())));
+
+        if(ticket.getStatus().equals("Closed")) {
+            long endDateLong = ticket.getDate();
+            LocalDateTime endDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(endDateLong), ZoneId.systemDefault());
+            closedDateLabel.setText(endDate.toLocalDate().toString());
+        }
 
         for(int i = 0; i < severity.length; i++){
 
@@ -155,6 +162,8 @@ public class TicketView extends JFrame{
         closeButton.addActionListener(ActionEvent -> {
             ticket.setStatus("Closed");
 
+            ticket.setDateEnd(getClosingDate());
+
             ticket.replaceSpaces();
 
             serverQuery.updateTicketToServer(ticket);
@@ -167,6 +176,8 @@ public class TicketView extends JFrame{
         rejectButton.addActionListener(ActionEvent -> {
             ticket.setStatus("Closed");
             ticket.setSolution("Rejected");
+
+            ticket.setDateEnd(getClosingDate());
 
             ticket.replaceSpaces();
 
@@ -186,6 +197,8 @@ public class TicketView extends JFrame{
             } else {
                 ticket.setStatus("Closed");
 
+                ticket.setDateEnd(getClosingDate());
+
                 ticket.replaceSpaces();
 
                 serverQuery.updateTicketToServer(ticket);
@@ -195,6 +208,13 @@ public class TicketView extends JFrame{
                 dispose();
             }
         });
+    }
+
+    private long getClosingDate() {
+        LocalDateTime dateCreated = LocalDateTime.now();
+        ZonedDateTime zdt = ZonedDateTime.of(dateCreated, ZoneId.systemDefault());
+
+        return zdt.toInstant().toEpochMilli();
     }
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
