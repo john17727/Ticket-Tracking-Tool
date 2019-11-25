@@ -2,6 +2,7 @@ package com.gui;
 
 import com.mock.ServerQuery;
 import com.mock.Ticket;
+import javafx.event.ActionEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class TicketView extends JFrame{
     private JLabel openDateLabel;
     private JLabel daysOpenLabel;
     private JLabel closedDateLabel;
+    private static JFrame frame;
 
     private static int accessLevel;
     private Ticket ticket;
@@ -98,7 +100,7 @@ public class TicketView extends JFrame{
     }
 
     private void initListeners() {
-        saveButton.addActionListener(ActiveEvent -> {
+        saveButton.addActionListener(ActionEvent -> {
             String title = titleEdit.getText();
             String status = statusBox.getSelectedItem().toString();
             int priority = Integer.parseInt(priorityBox.getSelectedItem().toString());
@@ -124,6 +126,50 @@ public class TicketView extends JFrame{
             ticket.replaceUnderscores();
 
             dispose();
+        });
+
+        closeButton.addActionListener(ActionEvent -> {
+            ticket.setStatus("Closed");
+
+            ticket.replaceSpaces();
+
+            serverQuery.updateTicketToServer(ticket);
+
+            ticket.replaceUnderscores();
+
+            dispose();
+        });
+
+        rejectButton.addActionListener(ActionEvent -> {
+            ticket.setStatus("Closed");
+            ticket.setSolution("Rejected");
+
+            ticket.replaceSpaces();
+
+            serverQuery.updateTicketToServer(ticket);
+
+            ticket.replaceUnderscores();
+
+            dispose();
+        });
+
+        resolvedButton.addActionListener(ActionEvent -> {
+            if(resEdit.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(frame,
+                        "To resolve ticket add a solution.",
+                        "Missing Solution",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                ticket.setStatus("Closed");
+
+                ticket.replaceSpaces();
+
+                serverQuery.updateTicketToServer(ticket);
+
+                ticket.replaceUnderscores();
+
+                dispose();
+            }
         });
     }
 
