@@ -1,6 +1,8 @@
 package com.gui;
 
 import com.google.gson.Gson;
+import java.time.LocalDateTime;
+import com.mock.ServerQuery;
 import com.mock.Ticket;
 import com.mock.TicketManager;
 
@@ -8,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 public class AddTicket extends JFrame{
     private JTextField titleEdit;
@@ -35,13 +40,14 @@ public class AddTicket extends JFrame{
     private int accessLevel;
 
     private TicketManager ticketManager;
+    private ServerQuery serverQuery;
 
 
 
     public AddTicket(int accessLevel, TicketManager ticketManager) {
         this.ticketManager = ticketManager;
-
         this.accessLevel = accessLevel;
+        serverQuery = new ServerQuery();
         add(mainPanel);
         setTitle("Add Ticket");
         setSize(800, 600);
@@ -67,29 +73,47 @@ public class AddTicket extends JFrame{
     private void initListeners() {
         createButton.addActionListener(ActionEvent -> {
             String title = titleEdit.getText();
-            String assignTo = assignedToEdit.getText();
             String status = statusDropbox.getSelectedItem().toString();
             int priority = Integer.parseInt(priorityDropbox.getSelectedItem().toString());
             String severity = severityDropbox.getSelectedItem().toString();
+            String assignTo = assignedToEdit.getText();
+            String client = requesterName.getText();
+            String description = descriptionText.getText();
+            String solution = resolutionText.getText();
 
-            Ticket ticket = new Ticket(title, status, priority, severity, assignTo);
+            LocalDateTime dateCreated = LocalDateTime.now();
+            ZonedDateTime zdt = ZonedDateTime.of(dateCreated, ZoneId.systemDefault());
+
+            long date = zdt.toInstant().toEpochMilli();
+
+            Ticket ticket = new Ticket(title, status, priority, severity, assignTo, client, description, solution, date);
 
             String jsonTicket = ticketToJson(ticket);
 
-            // Send to database
+            String id = serverQuery.addTicketToServer(ticket);
 
             if(title.isEmpty()) {
                 JOptionPane.showMessageDialog(frame,
                         "Please insert a title.",
                         "Missing Title",
                         JOptionPane.WARNING_MESSAGE);
-            }
-            else if(assignTo.isEmpty()) {
+            } else if(assignTo.isEmpty()) {
                 JOptionPane.showMessageDialog(frame,
                         "Please insert someone to assign the ticket to.",
                         "Missing Assignee",
                         JOptionPane.WARNING_MESSAGE);
+            } else if(id.equals("-1")) {
+                JOptionPane.showMessageDialog(frame,
+                        "Server failed to save ticket.",
+                        "Server Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if(id.equals("-2")) {
+                JOptionPane.showMessageDialog(frame,
+                        "Connection to server failed.",
+                        "Connection Error",
+                        JOptionPane.ERROR_MESSAGE);
             } else {
+                ticket.setId(id);
                 ticketManager.addTicket(ticket);
                 dispose();
             }

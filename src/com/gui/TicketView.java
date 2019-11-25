@@ -77,7 +77,7 @@ public class TicketView extends JFrame{
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         SwingUtilities.invokeLater(() -> {
-            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default"), accessLevel).setVisible(true);
+            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default", "Default", "Default", "Default", 0), accessLevel).setVisible(true);
         });
     }
 }
