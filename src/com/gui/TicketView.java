@@ -199,6 +199,8 @@ public class TicketView extends JFrame{
 
                 ticket.setDateEnd(getClosingDate());
 
+                ticket.setSolution(resEdit.getText());
+
                 ticket.replaceSpaces();
 
                 serverQuery.updateTicketToServer(ticket);
