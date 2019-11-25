@@ -11,6 +11,7 @@ public class TicketManager {
     public TicketManager() {
         serverQuery = new ServerQuery();
         tickets = serverQuery.getDefault();
+        replaceUnderscores();
     }
 
     public List<Ticket> getTickets() {
@@ -23,6 +24,12 @@ public class TicketManager {
 
     public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
+    }
+
+    public void replaceUnderscores() {
+        for(Ticket ticket:tickets) {
+            ticket.replaceUnderscores();
+        }
     }
 
     public List<Ticket> search(String query) {

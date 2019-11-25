@@ -88,7 +88,7 @@ public class AddTicket extends JFrame{
 
             Ticket ticket = new Ticket(title, status, priority, severity, assignTo, client, description, solution, date);
 
-            String jsonTicket = ticketToJson(ticket);
+            ticket.replaceSpaces();
 
             String id = serverQuery.addTicketToServer(ticket);
 
@@ -114,6 +114,7 @@ public class AddTicket extends JFrame{
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 ticket.setId(id);
+                ticket.replaceUnderscores();
                 ticketManager.addTicket(ticket);
                 dispose();
             }
@@ -122,10 +123,5 @@ public class AddTicket extends JFrame{
         cancelButton.addActionListener(ActionEvent -> {
             dispose();
         });
-    }
-
-    private String ticketToJson(Ticket ticket) {
-        Gson gson = new Gson();
-        return gson.toJson(ticket);
     }
 }
