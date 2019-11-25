@@ -1,6 +1,5 @@
 package com.gui;
 
-import com.google.gson.Gson;
 import java.time.LocalDateTime;
 import com.mock.ServerQuery;
 import com.mock.Ticket;
@@ -8,11 +7,10 @@ import com.mock.TicketManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+
+import java.util.List;
 
 public class AddTicket extends JFrame{
     private JTextField titleEdit;
@@ -21,7 +19,7 @@ public class AddTicket extends JFrame{
     private JLabel NameLabel;
     private JTextField requesterName;
     private JLabel AssignedToLabel;
-    private JTextField assignedToEdit;
+    private JComboBox AssignedToDropbox;
     private JLabel SeverityLabel;
     private JLabel PriorityLabel;
     private JLabel StatusLabel;
@@ -42,11 +40,12 @@ public class AddTicket extends JFrame{
     private TicketManager ticketManager;
     private ServerQuery serverQuery;
 
+    List<String> UsersListNames;
 
-
-    public AddTicket(int accessLevel, TicketManager ticketManager) {
+    public AddTicket(int accessLevel, TicketManager ticketManager, List<String> UsersListNames) {
         this.ticketManager = ticketManager;
         this.accessLevel = accessLevel;
+        this.UsersListNames = UsersListNames;
         serverQuery = new ServerQuery();
         add(mainPanel);
         setTitle("Add Ticket");
@@ -68,6 +67,11 @@ public class AddTicket extends JFrame{
         severityDropbox.addItem("Critical");
 
         statusDropbox.addItem("New");
+
+        for(int i = 0; i < UsersListNames.size(); i++) {
+
+            AssignedToDropbox.addItem(UsersListNames.get(i));
+        }
     }
 
     private void initListeners() {
@@ -76,7 +80,7 @@ public class AddTicket extends JFrame{
             String status = statusDropbox.getSelectedItem().toString();
             int priority = Integer.parseInt(priorityDropbox.getSelectedItem().toString());
             String severity = severityDropbox.getSelectedItem().toString();
-            String assignTo = assignedToEdit.getText();
+            String assignTo = AssignedToDropbox.getSelectedItem().toString();
             String client = requesterName.getText();
             String description = descriptionText.getText();
             String solution = resolutionText.getText();

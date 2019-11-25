@@ -204,7 +204,7 @@ public class MainWindow extends JFrame {
         });
 
         addTicketButton.addActionListener(actionEvent -> {
-            AddTicket newTicket = new AddTicket(accessLevel, ticketManager);
+            AddTicket newTicket = new AddTicket(accessLevel, ticketManager, UsersListNames);
             newTicket.setVisible(true);
             newTicket.addWindowListener(new WindowAdapter() {
                 @Override
