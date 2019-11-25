@@ -1,6 +1,7 @@
 package com.mock;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.imageio.IIOException;
 import javax.swing.*;
@@ -67,9 +68,21 @@ public class ServerQuery {
         return ticket;
     }
 
+    private List<Ticket> toTickets(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new TypeToken<List<Ticket>>(){}.getType());
+    }
+
     // Gets default data
     public List<Ticket> getDefault() {
-        return data;
+        try {
+            return toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList"));
+
+        } catch (IOException e) {
+            System.out.println(e);
+            return data;
+        }
+        //return new ArrayList<Ticket>();
     }
 
     public String addTicketToServer(Ticket ticket) {

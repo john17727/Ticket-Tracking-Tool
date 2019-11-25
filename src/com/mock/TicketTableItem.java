@@ -10,6 +10,7 @@ public class TicketTableItem extends AbstractTableModel {
 
     public TicketTableItem(List<Ticket> tickets) {
         this.tickets = new ArrayList<Ticket>(tickets);
+
     }
 
     @Override
