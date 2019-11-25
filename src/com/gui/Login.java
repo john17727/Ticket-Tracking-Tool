@@ -4,6 +4,7 @@ import com.controllers.Authentication;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -37,7 +38,11 @@ public class Login extends JFrame{
                 int accessLevel = Authentication.login(userName, password);
                 //og
                 if (accessLevel != -1) {
-                    new MainWindow(accessLevel).setVisible(true);
+                    try {
+                        new MainWindow(accessLevel).setVisible(true);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     dispose();//end of og
                 } else {
                     errorMsg.setVisible(true);

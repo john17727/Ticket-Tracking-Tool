@@ -1,15 +1,18 @@
 package com.gui;
 
-import com.mock.ServerQuery;
-import com.mock.Ticket;
-import com.mock.TicketManager;
-import com.mock.TicketTableItem;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mock.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +47,10 @@ public class MainWindow extends JFrame {
     private List<String> status = new ArrayList<String>();
     private List<Integer> priority = new ArrayList<Integer>();
 
-    public MainWindow(int accessLevel) {
+    //private String[] UsersListNames;
+    private List<String> UsersListNames;
+
+    public MainWindow(int accessLevel) throws IOException {
         this.accessLevel = accessLevel;
         add(mainPanel);
         setTitle("Ticket Manager");
@@ -74,6 +80,26 @@ public class MainWindow extends JFrame {
         initTable();
         initButtons();
         initListeners();
+        userList();
+    }
+
+    public static List<String> toArray(String json){
+
+        Gson gson = new Gson();
+        return gson.fromJson(json, new TypeToken<List<String>>(){}.getType());
+    }
+
+    public void userList()throws IOException {
+
+        URL url = new URL("https://tinevra.herokuapp.com/usersList");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String result = in.readLine();
+        in.close();
+
+        this.UsersListNames = toArray(result);
     }
 
     // Initializes table with default values
@@ -119,7 +145,7 @@ public class MainWindow extends JFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Ticket ticket = model.getTicketAt(ticketTable.convertRowIndexToModel(ticketTable.getSelectedRow()));
-                    TicketView ticketView = new TicketView(ticket, accessLevel);
+                    TicketView ticketView = new TicketView(ticket, accessLevel, UsersListNames);
                     ticketView.setVisible(true);
                     ticketView.addWindowListener(new WindowAdapter() {
                         @Override

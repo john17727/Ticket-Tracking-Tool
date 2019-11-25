@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
+import java.util.List;
+
 public class TicketView extends JFrame{
     private JTextArea descEdit;
     private JTextField titleEdit;
@@ -32,12 +34,18 @@ public class TicketView extends JFrame{
     private Ticket ticket;
     private ServerQuery serverQuery;
     private String[] lvl0 = {"New", "Fixed", "Open","Rejected", "Closed"};
-    private String[] lvl1 = {"Rejected" , "Closed"};//set to open if new
+    private String[] lvl1 = {"Rejected" , "Closed"};
     private String[] lvl2 = {"New", "Fixed", "Open",};
+    private String[] severity = {"Routine", "Urgent", "Critical",};
 
-    public TicketView(Ticket ticket, int accessLevel) {
+    private static List<String> UsersListNames;
+
+
+
+    public TicketView(Ticket ticket, int accessLevel, List<String> UsersListNames) {
         this.ticket = ticket;
         this.accessLevel = accessLevel;
+        this.UsersListNames = UsersListNames;
         serverQuery = new ServerQuery();
         add(mainPanel);
         setTitle(ticket.getTitle());
@@ -67,10 +75,26 @@ public class TicketView extends JFrame{
         LocalDateTime now = LocalDateTime.now();
         daysOpenLabel.setText(String.valueOf(ChronoUnit.DAYS.between(date.toLocalDate(), now.toLocalDate())));
 
+        for(int i = 0; i < severity.length; i++){
+
+            if(!ticket.getSeverity().equals(severity[i])){severityBox.addItem(severity[i]);}
+        }
+
+        for(int i = 0; i < UsersListNames.size(); i++){
+
+            if(!ticket.getAssignedTo().equals(UsersListNames.get(i))){assignBox.addItem(UsersListNames.get(i));}
+        }
+
         if(accessLevel == 0){
+
             for(int i = 0; i < lvl0.length; i++){
 
                 if(!ticket.getStatus().equals(lvl0[i])){statusBox.addItem(lvl0[i]);}
+            }
+
+            for(int i = 0; i <= 10; i++){
+
+                if(ticket.getPriority() != i){priorityBox.addItem(i);}
             }
         }
 
@@ -130,7 +154,7 @@ public class TicketView extends JFrame{
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         SwingUtilities.invokeLater(() -> {
-            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default", "Default", "Default", "Default", 0), accessLevel).setVisible(true);
+            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default", "Default", "Default", "Default", 0), accessLevel, UsersListNames).setVisible(true);
         });
     }
 }

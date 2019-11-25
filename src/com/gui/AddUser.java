@@ -60,11 +60,7 @@ public class AddUser extends JFrame{
                     int newAccessLvl = Integer.parseInt(temp);
                     int test = Authentication.addNewUser(name, username, email, hashPassword(password), newAccessLvl);
 
-                    if(test == 1){
-
-                        //new MainWindow(accessLevel).setVisible(true);
-                        dispose();
-                    }
+                    if(test == 1){dispose();}
 
                     else{errorMsg.setVisible(true);}
                 }
