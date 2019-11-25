@@ -22,6 +22,7 @@ public class ServerQuery {
     private List<Ticket> data;
 
     public ServerQuery() {
+        /*
         data1 = new String[][] {
                 {"Ticket 1", "Open", "10", "Urgent", "Juan Rincon"},
                 {"Ticket 2", "Open", "3", "Routine", "Alex Ortega"},
@@ -47,7 +48,6 @@ public class ServerQuery {
         for(String info:jsonInfo) {
             data.add(toTicket(info));
         }
-        /*
         Ticket me = new Ticket("Ticket 1", "Open", 10, "Urgent", "Juan Rincon");
         data.add(me);
         data.add(new Ticket("Ticket 2", "Open", 3, "Routine", "Alex Ortega"));
@@ -77,12 +77,30 @@ public class ServerQuery {
     public List<Ticket> getDefault() {
         try {
             return toTickets(connectToServer("https://tinevra.herokuapp.com/ticketsList"));
-
         } catch (IOException e) {
             System.out.println(e);
-            return data;
         }
-        //return new ArrayList<Ticket>();
+        return new ArrayList<Ticket>();
+    }
+
+    public String updateTicketToServer(Ticket ticket) {
+        try {
+            return connectToServer("https://tinevra.herokuapp.com/update-tickets/" +
+                    ticket.getId() + "/" +
+                    ticket.getTitle() + "/" +
+                    ticket.getStatus() + "/" +
+                    ticket.getPriority() + "/" +
+                    ticket.getSeverity() + "/" +
+                    ticket.getAssignedTo() + "/" +
+                    ticket.getDescription() + "/" +
+                    ticket.getSolution() + "/" +
+                    ticket.getDate() + "/" +
+                    ticket.getDateEnd() + "/" +
+                    ticket.getClient());
+        } catch (IOException e) {
+            System.out.println(e);
+            return "-3";
+        }
     }
 
     public String addTicketToServer(Ticket ticket) {
@@ -111,6 +129,8 @@ public class ServerQuery {
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String result = in.readLine();
         in.close();
+
+        System.out.println(result);
 
         return result;
     }

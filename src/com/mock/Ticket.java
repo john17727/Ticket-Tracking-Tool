@@ -2,7 +2,7 @@ package com.mock;
 
 public class Ticket {
 
-    private String id;
+    private String objectId;
 
     private String title;
     private String client;
@@ -15,8 +15,8 @@ public class Ticket {
     private long date;
     private long dateEnd;
 
-    public Ticket(String title, String status, int priority, String severity, String assignedTo, String client, String description, String solution, long date, long dateEnd) {
-        id = "";
+    public Ticket(String title, String status, int priority, String severity, String assignedTo, String client, String description, String solution, long date) {
+        this.objectId = "";
         this.title = title;
         this.status = status;
         this.priority = priority;
@@ -26,7 +26,21 @@ public class Ticket {
         this.description = description;
         this.solution = solution;
         this.date = date;
-        this.dateEnd = dateEnd;
+        this.dateEnd = -1;
+    }
+
+    public Ticket(String objectId, String title, String status, int priority, String severity, String assignedTo, String client, String description, String solution, long date, long dateEnd) {
+        this.objectId = objectId;
+        this.title = title;
+        this.status = status;
+        this.priority = priority;
+        this.severity = severity;
+        this.assignedTo = assignedTo;
+        this.client = client;
+        this.description = description;
+        this.solution = solution;
+        this.date = date;
+        this.dateEnd = -1;
     }
 
     public String getTitle() {
@@ -102,11 +116,11 @@ public class Ticket {
     }
 
     public String getId() {
-        return id;
+        return objectId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String objectId) {
+        this.objectId = objectId;
     }
 
     public long getDateEnd() {

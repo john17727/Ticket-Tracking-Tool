@@ -12,6 +12,10 @@ public class TicketManager {
         serverQuery = new ServerQuery();
         tickets = serverQuery.getDefault();
         replaceUnderscores();
+
+        for(Ticket ticket:tickets) {
+            System.out.println("ID: " + ticket.getId());
+        }
     }
 
     public List<Ticket> getTickets() {

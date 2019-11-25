@@ -1,5 +1,6 @@
 package com.gui;
 
+import com.mock.ServerQuery;
 import com.mock.Ticket;
 
 import javax.swing.*;
@@ -26,19 +27,26 @@ public class TicketView extends JFrame{
     private JLabel openDateLabel;
     private JLabel daysOpenLabel;
     private JLabel closedDateLabel;
+
     private static int accessLevel;
+    private Ticket ticket;
+    private ServerQuery serverQuery;
     private String[] lvl0 = {"New", "Fixed", "Open","Rejected", "Closed"};
     private String[] lvl1 = {"Rejected" , "Closed"};//set to open if new
     private String[] lvl2 = {"New", "Fixed", "Open",};
 
     public TicketView(Ticket ticket, int accessLevel) {
+        this.ticket = ticket;
         this.accessLevel = accessLevel;
+        serverQuery = new ServerQuery();
         add(mainPanel);
         setTitle(ticket.getTitle());
         setSize(800, 600);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
+
+        initListeners();
         setInfo(ticket);
     }
 
@@ -89,10 +97,40 @@ public class TicketView extends JFrame{
         }
     }
 
+    private void initListeners() {
+        saveButton.addActionListener(ActiveEvent -> {
+            String title = titleEdit.getText();
+            String status = statusBox.getSelectedItem().toString();
+            int priority = Integer.parseInt(priorityBox.getSelectedItem().toString());
+            String severity = severityBox.getSelectedItem().toString();
+            String assignTo = assignBox.getSelectedItem().toString();
+            String client = clientEdit.getText();
+            String description = descEdit.getText();
+            String solution = resEdit.getText();
+
+            ticket.setTitle(title);
+            ticket.setStatus(status);
+            ticket.setPriority(priority);
+            ticket.setSeverity(severity);
+            ticket.setAssignedTo(assignTo);
+            ticket.setClient(client);
+            ticket.setDescription(description);
+            ticket.setSolution(solution);
+
+            ticket.replaceSpaces();
+
+            String result = serverQuery.updateTicketToServer(ticket);
+
+            ticket.replaceUnderscores();
+
+            dispose();
+        });
+    }
+
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         SwingUtilities.invokeLater(() -> {
-            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default", "Default", "Default", "Default", 0, 0), accessLevel).setVisible(true);
+            new TicketView(new Ticket("Default", "Default", 0, "Default", "Default", "Default", "Default", "Default", 0), accessLevel).setVisible(true);
         });
     }
 }
