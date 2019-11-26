@@ -14,7 +14,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainWindow extends JFrame {
 
@@ -81,6 +84,18 @@ public class MainWindow extends JFrame {
         initButtons();
         initListeners();
         userList();
+        setTimer();
+    }
+
+    public void setTimer() {
+        TimerTask repeatedTask = new TimerTask() {
+            public void run() {
+                data = ticketManager.getTicketsFromServer();
+                showTable(data);
+            }
+        };
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(repeatedTask, 5000, 5000); // 2 minutes = 120000 milli
     }
 
     public static List<String> toArray(String json){
