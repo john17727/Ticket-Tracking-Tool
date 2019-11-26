@@ -43,6 +43,7 @@ public class MainWindow extends JFrame {
 
     private TicketManager ticketManager;
     private ServerQuery serverQuery;
+    private String currentTicketID;
 
     private TicketTableItem model;
     private int accessLevel;
@@ -175,6 +176,7 @@ public class MainWindow extends JFrame {
                                         "Locked Ticket",
                                         JOptionPane.WARNING_MESSAGE);
                             } else {
+                                currentTicketID = ticket.getId();
                                 serverQuery.toggleTicketLock(ticket.getId());
                             }
                         }
@@ -182,6 +184,7 @@ public class MainWindow extends JFrame {
                         @Override
                         public void windowClosing(WindowEvent e) {
                             super.windowClosing(e);
+                            currentTicketID = "";
                             serverQuery.toggleTicketLock(ticket.getId());
                             showTable(data);
                         }
@@ -189,6 +192,7 @@ public class MainWindow extends JFrame {
                         @Override
                         public void windowClosed(WindowEvent e) {
                             super.windowClosed(e);
+                            currentTicketID = "";
                             serverQuery.toggleTicketLock(ticket.getId());
                             showTable(data);
                         }
@@ -208,6 +212,16 @@ public class MainWindow extends JFrame {
 
     // Initializes all listeners of the window
     private void initListeners() {
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                if(!currentTicketID.isEmpty()) {
+                    serverQuery.toggleTicketLock(currentTicketID);
+                }
+            }
+        });
 
         addUserButton.addActionListener(ActionEvent -> {
             AddUser newUser = new AddUser(accessLevel);
