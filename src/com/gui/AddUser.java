@@ -83,7 +83,6 @@ public class AddUser extends JFrame{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(toBytes(password));
             hashedPass = bytesToHex(encodedHash);
-            //System.out.println(hashedPass);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

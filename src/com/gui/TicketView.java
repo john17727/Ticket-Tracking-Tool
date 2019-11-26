@@ -1,7 +1,7 @@
 package com.gui;
 
-import com.mock.ServerQuery;
-import com.mock.Ticket;
+import com.controllers.ServerQuery;
+import com.data.Ticket;
 //import javafx.event.ActionEvent;    ///Line Removed, might be important
 
 import javax.swing.*;

@@ -1,10 +1,12 @@
 package com.gui;
 
+import com.controllers.ServerQuery;
+import com.controllers.TicketManager;
+import com.data.Ticket;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mock.*;
+import com.adapters.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +16,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -66,8 +67,6 @@ public class MainWindow extends JFrame {
         ticketManager = new TicketManager();
         serverQuery = new ServerQuery();
 
-        //System.out.println(this.accessLevel);
-
         if(accessLevel != 0){
 
             addUserButton.setEnabled(false);
@@ -87,6 +86,7 @@ public class MainWindow extends JFrame {
         setTimer();
     }
 
+    // Refreshes tickets at an interval
     public void setTimer() {
         TimerTask repeatedTask = new TimerTask() {
             public void run() {
@@ -98,12 +98,14 @@ public class MainWindow extends JFrame {
         t.scheduleAtFixedRate(repeatedTask, 5000, 5000); // 2 minutes = 120000 milli
     }
 
+    // Converts the json to list of users
     public static List<String> toArray(String json){
 
         Gson gson = new Gson();
         return gson.fromJson(json, new TypeToken<List<String>>(){}.getType());
     }
 
+    // Gets the list of users
     public void userList()throws IOException {
 
         URL url = new URL("https://tinevra.herokuapp.com/usersList");

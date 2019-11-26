@@ -1,4 +1,6 @@
-package com.mock;
+package com.adapters;
+
+import com.data.Ticket;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -78,10 +80,12 @@ public class TicketTableItem extends AbstractTableModel {
         return getValueAt(0, columnIndex).getClass();
     }
 
+    // Returns a ticket object from a table row
     public Ticket getTicketAt(int row) {
         return tickets.get(row);
     }
 
+    // prints all tickets
     public void printTickets() {
         tickets.forEach(ticket -> System.out.println(ticket.getTitle()));
     }

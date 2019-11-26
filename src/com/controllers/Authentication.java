@@ -22,24 +22,7 @@ public class Authentication{
         return -1;
     }
 
-//    public static String[] userList()throws IOException{
-//
-//        String userURL = base + "/usersList";
-//
-//        URL url = new URL(userURL);
-//        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//        connection.setRequestMethod("GET");
-//
-//        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//        String temp[] = in.readLine();
-//        in.close();
-//        int successful = Integer.parseInt(temp);
-//
-//        if(successful == 1){return 1;}
-//
-//        return temp;
-//    }
-
+    // Adds new user to server
     public static int addNewUser(String name, String username, String email, String password, int newAccessLvl)throws IOException{
 
         String parameters = name + "/" + username + "/" + email + "/" + password + "/" + newAccessLvl;
@@ -59,6 +42,7 @@ public class Authentication{
         return -1;
     }
 
+    // Establishes connection to server
     private static int connectToServer(String username, String password) throws IOException {
         String parameters = username + "/" + password + "/accesslvl";
         String userURL = base + parameters;

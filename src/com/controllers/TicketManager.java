@@ -1,4 +1,6 @@
-package com.mock;
+package com.controllers;
+
+import com.data.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +14,6 @@ public class TicketManager {
         serverQuery = new ServerQuery();
         tickets = serverQuery.getDefault();
         replaceUnderscores();
-
-        for(Ticket ticket:tickets) {
-            System.out.println("ID: " + ticket.getId());
-        }
     }
 
     public List<Ticket> getTickets() {

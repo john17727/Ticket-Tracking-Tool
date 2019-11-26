@@ -1,4 +1,4 @@
-package com.mock;
+package com.data;
 
 public class Users {
 

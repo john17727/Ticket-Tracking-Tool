@@ -1,9 +1,9 @@
 package com.gui;
 
 import java.time.LocalDateTime;
-import com.mock.ServerQuery;
-import com.mock.Ticket;
-import com.mock.TicketManager;
+import com.controllers.ServerQuery;
+import com.data.Ticket;
+import com.controllers.TicketManager;
 
 import javax.swing.*;
 import java.awt.*;
